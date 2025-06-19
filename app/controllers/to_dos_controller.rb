@@ -1,5 +1,5 @@
 class ToDosController < ApplicationController
-  before_action :set_to_dos_and_counts, only: [:index, :create]
+  before_action :set_to_dos_and_counts, only: [ :index, :create ]
 
   def index
     @to_do = ToDo.new
