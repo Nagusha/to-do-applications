@@ -33,6 +33,7 @@ class ToDosController < ApplicationController
 
   def set_to_dos_and_counts
     @to_dos = ToDo.order(created_at: :desc)
+    @grouped_todos = @to_dos.group_by { |todo| todo.created_at.to_date }
     @total_count = @to_dos.count
     @completed_count = @to_dos.where(completed: true).count
     @uncompleted_count = @to_dos.where(completed: false).count
