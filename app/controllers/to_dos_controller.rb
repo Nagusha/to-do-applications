@@ -16,7 +16,12 @@ class ToDosController < ApplicationController
 
   def toggle
     @to_do = ToDo.find(params[:id])
-    @to_do.toggle!(:completed)
+    if @to_do
+      @to_do.toggle!(:completed)
+      flash[:notice] = "To-do updated!"
+    else 
+       flash[:alert] = "To-do not found!"
+    end
     redirect_to to_dos_path
   end
 
