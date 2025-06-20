@@ -9,35 +9,41 @@
   <% end %>
 </div>
 
-<!-- ToDo List -->
-<ul style="list-style: none; padding: 0; max-width: 600px; margin: auto;">
-  <% @to_dos.each do |todo| %>
-    <li style="
-      background-color: <%= todo.completed ? '#d4edda' : '#ffffff' %>;
-      text-decoration: <%= todo.completed ? 'line-through' : 'none' %>;
-      padding: 15px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-      position: relative;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
-      onclick="document.getElementById('toggle_<%= todo.id %>').submit();">
+<% @grouped_todos.each do |date, todos| %>
+  <h2 style="text-align: center; color: green; margin-top: 30px;">
+    <%= date.strftime("%d %B %Y") %>
+  </h2>
 
-      <%= todo.title %>
+  <!-- ToDo List -->
+  <ul style="list-style: none; padding: 0; max-width: 600px; margin: auto;">
+    <% todos.each do |todo| %> <!-- THIS LINE IS FIXED -->
+      <li style="
+        background-color: <%= todo.completed ? '#d4edda' : '#ffffff' %>;
+        text-decoration: <%= todo.completed ? 'line-through' : 'none' %>;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
+        onclick="document.getElementById('toggle_<%= todo.id %>').submit();">
 
-      <!-- Hidden toggle form -->
-      <%= form_with url: toggle_to_do_path(todo), method: :patch, local: true, id: "toggle_#{todo.id}", style: "display: none;" do %>
-      <% end %>
+        <%= todo.title %>
 
-      <!-- Delete button -->
-      <%= button_to "🗑️", to_do_path(todo), method: :delete, data: { confirm: "Are you sure?" },
-          style: "position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
-                  background: none; border: none; color: red; font-size: 20px; cursor: pointer;" %>
-    </li>
-  <% end %>
-</ul>
+        <!-- Hidden toggle form -->
+        <%= form_with url: toggle_to_do_path(todo), method: :patch, local: true, id: "toggle_#{todo.id}", style: "display: none;" do %>
+        <% end %>
+
+        <!-- Delete button -->
+        <%= button_to "🗑️", to_do_path(todo), method: :delete, data: { confirm: "Are you sure?" },
+            style: "position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+                    background: none; border: none; color: red; font-size: 20px; cursor: pointer;" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 <!-- Count Summary -->
 <div style="text-align: center; margin-top: 30px; font-size: 16px;">
