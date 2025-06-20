@@ -19,7 +19,7 @@ class ToDosController < ApplicationController
     if @to_do
       @to_do.toggle!(:completed)
       flash[:notice] = "To-do updated!"
-    else 
+    else
        flash[:alert] = "To-do not found!"
     end
     redirect_to to_dos_path
