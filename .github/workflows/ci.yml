@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [ main, better-ui, grouped-by-month, user-login-todo ]
 
 jobs:
   scan_ruby:

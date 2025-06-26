@@ -1,0 +1,22 @@
+<h1 style="text-align: center; margin-top: 30px; color: green;">Sign Up</h1>
+
+<div style="max-width: 400px; margin: 0 auto; padding: 30px; background-color: #f7f7f7; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 10px;">
+  <%= form_with model: @user, url: users_path, local: true do |form| %>
+    <div style="margin-bottom: 15px;">
+      <%= form.email_field :email, placeholder: "Email", required: true, style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <%= form.password_field :password, placeholder: "Password", required: true, style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <%= form.password_field :password_confirmation, placeholder: "Confirm Password", required: true, style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+    </div>
+
+    <%= form.submit "Sign Up", style: "width: 100%; background-color: green; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 16px;" %>
+  <% end %>
+  <p style="text-align: center; margin-top: 15px;">
+    Already have an account? <%= link_to "Click here to Login", login_path %>
+  </p>
+</div>
